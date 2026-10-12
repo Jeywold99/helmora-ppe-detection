@@ -1,0 +1,58 @@
+# Unified PPE class taxonomy for the Smart Hard Hat prototype.
+# Every source dataset's labels get remapped into these IDs in prepare_dataset.py
+# so the model always trains against one consistent schema, regardless of
+# how many datasets you merge in later.
+
+classes:
+  0: person
+  1: hardhat
+  2: no_hardhat
+  3: safety_vest
+  4: no_safety_vest
+  5: gloves
+  6: no_gloves
+  7: boots
+  8: no_boots
+
+# Label-mapping tables: source dataset class name (as it appears in that
+# dataset's _annotations.coco.json "categories") -> unified class name above.
+# Add a new block here every time you bring in another dataset.
+# Any source label NOT listed is dropped during merge (e.g. "machinery",
+# "vehicle", "Safety Cone", "Mask" from the construction-site-safety set,
+# since they're outside this prototype's PPE scope).
+
+source_mappings:
+
+  # Roboflow "Construction Site Safety Image Dataset" (CC BY 4.0)
+  construction_site_safety:
+    Person: person
+    Hardhat: hardhat
+    NO-Hardhat: no_hardhat
+    Safety Vest: safety_vest
+    NO-Safety Vest: no_safety_vest
+
+  # "Construction PPE" by skcet (CC BY 4.0)
+  # https://universe.roboflow.com/skcet-g4h72/construction-ppe-rdhzo
+  # This dataset was itself merged from multiple sources upstream, so it has
+  # inconsistent-case duplicate class names (Helmet/helmet, Gloves/gloves).
+  # Both variants are mapped to the same unified class below. Re-check this
+  # block against your actual downloaded _annotations.coco.json -- Roboflow
+  # exports sometimes drop unused classes, so not all 16 listed on the
+  # project page may appear in every split.
+  construction_ppe_skcet:
+    Human: person
+    Helmet: hardhat
+    helmet: hardhat
+    hat: hardhat
+    no hat: no_hardhat
+    Safety Vest: safety_vest
+    vest: safety_vest
+    no vest: no_safety_vest
+    Gloves: gloves
+    gloves: gloves
+    no gloves: no_gloves
+    Safety Boot: boots
+    boots: boots
+    no boot: no_boots
+    no boots: no_boots
+    # glasses: intentionally dropped, outside this prototype's PPE scope

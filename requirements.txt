@@ -1,0 +1,11 @@
+# Core (all Apache-2.0 / BSD / MIT -- no AGPL dependencies anywhere here)
+torch>=2.2
+torchvision>=0.17
+transformers>=4.44          # RT-DETR support (Apache-2.0 implementation)
+accelerate>=0.33            # multi-GPU / mixed-precision training loop support
+pycocotools>=2.0.7          # COCO-format annotation handling + mAP eval
+pillow>=10.0
+numpy>=1.26
+opencv-python>=4.9          # inference-time drawing / webcam capture
+pyyaml>=6.0
+tqdm>=4.66
